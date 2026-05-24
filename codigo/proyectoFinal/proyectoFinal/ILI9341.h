@@ -5,6 +5,7 @@
 #include <util/delay.h>
 #include <stdint.h>
 #include "SPI.h"
+#include <stdarg.h>
 
 // =============================================
 // PINES DE CONTROL
@@ -49,7 +50,7 @@
 #define TFT_CYAN    0x07FF
 #define TFT_MAGENTA 0xF81F
 #define TFT_ORANGE  0xFD20
-
+#define TFT_PINK    0xF812
 // =============================================
 // COMANDOS ILI9341
 // =============================================
@@ -75,6 +76,7 @@
 // =============================================
 // FUNCIONES
 // =============================================
+void TFT_display(int16_t x, int16_t y, uint16_t color, uint16_t bg, uint8_t size, const char *fmt, ...);
 void ILI9341_init(void);
 void ILI9341_fillScreen(uint16_t color);
 void ILI9341_fillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color);

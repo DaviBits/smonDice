@@ -111,6 +111,25 @@ static int16_t  _cursorY    = 0;
 static uint16_t _textColor  = TFT_WHITE;
 static uint8_t  _textSize   = 1;
 
+//==============================================
+//DISPLAY AUTOMATIZADO
+//==============================================
+void TFT_display(int16_t x, int16_t y, uint16_t color, uint16_t bg, uint8_t size, const char *fmt, ...) {
+	char buf[64];
+	va_list args;
+	va_start(args, fmt);
+	vsnprintf(buf, sizeof(buf), fmt, args);
+	va_end(args);
+
+	uint16_t w = strlen(buf) * 6 * size;
+	uint16_t h = 8 * size;
+	ILI9341_fillRect(x, y, w, h, bg);  // <-- tu color de fondo
+
+	ILI9341_setCursor(x, y);
+	ILI9341_setTextColor(color);
+	ILI9341_setTextSize(size);
+	ILI9341_print(buf);
+}
 // =============================================
 // FUNCIONES INTERNAS
 // =============================================
@@ -370,3 +389,4 @@ void ILI9341_drawBMP(const char *name83, int16_t x, int16_t y) {
 	}
 	UART_string("BMP ok\r\n");
 }
+
